@@ -47,6 +47,22 @@ def check_bound(scr_rct: pg.Rect, obj_rct: pg.Rect) -> tuple[bool, bool]:
 #                 }
     
 
+# def kk(kk):
+#     kk_img = pg.image.load("ex02/fig/3.png")
+#     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+#     kk_img2 = pg.transform.flip(kk_img, True, False)
+#     direction = {
+#                 (0, -1): pg.transform.rotozoom(kk_img2, 270, 2.0),
+#                 (-1, -1): pg.transform.rotozoom(kk_img, 305, 2.0),
+#                 (-1, 0): pg.transform.rotozoom(kk_img, 0, 2.0),
+#                 (-1, +1): pg.transform.rotozoom(kk_img, 45, 2.0),
+#                 (0, +1): pg.transform.rotozoom(kk_img2, 90, 2.0),
+#                 (+1, +1): pg.transform.rotozoom(kk_img2, 135, 2.0),
+#                 (+1, 0): pg.transform.rotozoom(kk_img2, 180, 2.0),
+#                 (+1, -1): pg.transform.rotozoom(kk_img2, 225, 2.0)
+#                 }
+    
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((1600, 900))
@@ -58,6 +74,16 @@ def main():
     kk_rct = kk_img.get_rect()  # 練習４
     kk_rct.center = (900, 400)  # 練習４
 
+    direction = {
+                (0, -1): pg.transform.rotozoom(kk_img2, 270, 2.0),
+                (-1, -1): pg.transform.rotozoom(kk_img, 305, 2.0),
+                (-1, 0): pg.transform.rotozoom(kk_img, 0, 2.0),
+                (-1, +1): pg.transform.rotozoom(kk_img, 45, 2.0),
+                (0, +1): pg.transform.rotozoom(kk_img2, 90, 2.0),
+                (+1, +1): pg.transform.rotozoom(kk_img2, 135, 2.0),
+                (+1, 0): pg.transform.rotozoom(kk_img2, 180, 2.0),
+                (+1, -1): pg.transform.rotozoom(kk_img2, 225, 2.0)
+                }
     direction = {
                 (0, -1): pg.transform.rotozoom(kk_img2, 270, 2.0),
                 (-1, -1): pg.transform.rotozoom(kk_img, 305, 2.0),
@@ -86,6 +112,8 @@ def main():
         tmr += 1
         screen.blit(bg_img, [0, 0])
         #screen.blit(kk_img, kk_rct)
+        screen.blit(bg_img, [0, 0])
+        #screen.blit(kk_img, kk_rct)
           # 練習４
         key_list = pg.key.get_pressed()
         for k, mv in delta.items():
@@ -96,12 +124,16 @@ def main():
                 # else:
                 #     screen.blit(kk_img, kk_rct)
                 
+                # else:
+                #     screen.blit(kk_img, kk_rct)
+                
             
           # 練習５
         if check_bound(screen.get_rect(), kk_rct) != (True, True):
             for k, mv in delta.items():
                 if key_list[k]:
                     kk_rct.move_ip(-mv[0], -mv[1])
+                
                 
         screen.blit(kk_img, kk_rct)  #練習４
         bb_rct.move_ip(vx, vy)  # 練習３
@@ -114,6 +146,11 @@ def main():
         screen.blit(bb_img, bb_rct)  # 練習３
           # 追加機能２
         if tmr + 1:  # tmrが1増えたら
+            if tmr < 1000:  # tmrが1000未満ならば
+                vx *= 1.001  # vxを1.001倍
+                vy *= 1.001  # vyを1.001倍
+        
+
             if tmr < 1000:  # tmrが1000未満ならば
                 vx *= 1.001  # vxを1.001倍
                 vy *= 1.001  # vyを1.001倍
